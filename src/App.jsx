@@ -4,10 +4,14 @@ const App = () => {
   const [state, setState] = useState(0);
 
   const addition = () => {
-    setState(state + 1);
+    if (state < 10) {
+      setState(state + 1);
+    }
   };
   const substraction = () => {
-    setState(state - 1);
+    if (state > 0) {
+      setState(state - 1);
+    }
   };
   return (
     <main className="container" style={{ marginTop: 80 }}>
@@ -30,7 +34,7 @@ const App = () => {
           <button className="secondary" onClick={substraction}>
             - Subtract
           </button>
-          
+
           <button onClick={addition}>+ Add</button>
         </div>
       </section>
