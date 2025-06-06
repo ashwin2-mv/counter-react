@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const App = () => {
   const [state, setState] = useState(0);
@@ -26,9 +27,11 @@ const App = () => {
   const reset = () => {
     setState(0);
     localStorage.clear();
+    toast.info("Reseted Successfully!");
   };
   const save = () => {
     localStorage.setItem("counterValue", state);
+    toast.success("Saved Successfully!");
   };
 
   useEffect(() => {
