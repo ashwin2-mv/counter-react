@@ -1,18 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [state, setState] = useState(0);
 
   const addition = () => {
-    if (state < 10) {
-      setState(state + 1);
+    if (state < 20) {
+      setState((prev) => prev + 1);
     }
   };
   const substraction = () => {
     if (state > 0) {
-      setState(state - 1);
+      setState((prev) => prev - 1);
     }
   };
+  const adding = () => {
+    if (state < 20) {
+      setState((prev) => prev + 2);
+    }
+  };
+  const substract = () => {
+    if (state > 0) {
+      setState((prev) => prev - 2);
+    }
+  };
+  const reset = () => {
+    setState(0);
+    localStorage.clear();
+  };
+  const save = () => {
+    localStorage.setItem("counterValue", state);
+  };
+
+  useEffect(() => {
+    const counterValue = localStorage.getItem("counterValue");
+    const parsedValue = parseInt(counterValue);
+    if (parsedValue) {
+      setState(parsedValue);
+    }
+  }, []);
   return (
     <main className="container" style={{ marginTop: 80 }}>
       <header style={{ textAlign: "center" }}>
@@ -32,10 +57,24 @@ const App = () => {
 
         <div className="grid">
           <button className="secondary" onClick={substraction}>
-            - Subtract
+            SUB -
           </button>
 
-          <button onClick={addition}>+ Add</button>
+          <button onClick={addition}> ADD +</button>
+        </div>
+        <div className="grid">
+          <button className="secondary" onClick={substract}>
+            SUB -2
+          </button>
+          <button onClick={adding}>ADD +2</button>
+        </div>
+        <div>
+          <button className="outline" onClick={reset}>
+            RESET
+          </button>
+          <button className="contrast" onClick={save}>
+            SAVE
+          </button>
         </div>
       </section>
     </main>
